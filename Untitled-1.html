@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Store</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Shopping Store</h1>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#products">Products</a></li>
+                    <li><a href="#video">Video</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="container">
+            <h2>Welcome to Our Store!</h2>
+            <p>Find top-quality products at amazing prices. Enjoy our exclusive offers and discounts!</p>
+            <a href="#products" class="btn-primary">Shop Now</a>
+        </div>
+    </section>
+
+    <section id="products">
+        <div class="container">
+            <h2>Our Products</h2>
+            <div class="filters">
+                <input type="text" id="search-bar" placeholder="Search products...">
+                <select id="category-filter">
+                    <option value="">All Categories</option>
+                    <option value="IWatch">IWatch</option>
+                    <option value="IPhone">IPhone</option>
+                    <option value="PS5">PS5</option>
+                </select>
+            </div>
+            <div class="product-grid">
+                <!-- Example of a product card -->
+                <div class="product" data-category="electronics">
+                    <img src="iwatch a.jpg" alt="Product 1">
+                    <h3>IWatch 8</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    <p><strong>48000</strong></p>
+                    <div class="rating">⭐⭐⭐⭐☆</div>
+                    <button class="btn-primary" onclick="openModal('product1-details')">View Details</button>
+                </div>
+                <div class="product" data-category="fashion">
+                    <img src="iwatch 220.jpg" alt="Product 2">
+                    <h3>IWatch 9</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    <p><strong>68000</strong></p>
+                    <div class="rating">⭐⭐⭐⭐⭐</div>
+                    <button class="btn-primary" onclick="openModal('product2-details')">View Details</button>
+                </div>
+                <!-- Add more products as needed -->
+            </div>
+            <!-- Pagination -->
+            <div class="pagination">
+                <a href="#">&laquo; Previous</a>
+                <a href="#">1</a>
+                <a href="#">2</a>
+                <a href="#">3</a>
+                <a href="#">Next &raquo;</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="video">
+        <div class="container">
+            <h2>Watch Our Latest Video</h2>
+            <div class="video-container">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/Nvb_Kta7v6U?si=jHYBxEWLp0Gf1daY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+        </div>
+    </section>
+
+    <section id="newsletter">
+        <div class="container">
+            <h2>Subscribe to Our Newsletter</h2>
+            <form id="newsletter-form">
+                <input type="email" id="email" placeholder="Enter your email address" required>
+                <button type="submit" class="btn-primary">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="container">
+            <p>&copy; 2024 Shopping Store</p>
+            <p>Email us at <a href="mailto:info@shoppingstore.com">info@shoppingstore.com</a></p>
+            <div class="social-media">
+                <a href="https://facebook.com" target="_blank">Facebook</a>
+                <a href="https://twitter.com" target="_blank">Twitter</a>
+                <a href="https://instagram.com" target="_blank">Instagram</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal for product details -->
+    <div id="product1-details" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('product1-details')">&times;</span>
+            <h2>Product 1 Details</h2>
+            <img src="product1.jpg" alt="Product 1">
+            <p>Here you can add more details about Product 1.</p>
+            <p><strong>Price: $29.99</strong></p>
+            <div class="rating">⭐⭐⭐⭐☆</div>
+            <h3>Reviews</h3>
+            <p><strong>John Doe:</strong> Great product! Highly recommend it. ⭐⭐⭐⭐⭐</p>
+            <p><strong>Jane Smith:</strong> Good value for money. ⭐⭐⭐⭐☆</p>
+        </div>
+    </div>
+
+    <div id="product2-details" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('product2-details')">&times;</span>
+            <h2>Product 2 Details</h2>
+            <img src="product2.jpg" alt="Product 2">
+            <p>Here you can add more details about Product 2.</p>
+            <p><strong>Price: $39.99</strong></p>
+            <div class="rating">⭐⭐⭐⭐⭐</div>
+            <h3>Reviews</h3>
+            <p><strong>Alex Johnson:</strong> Excellent quality and fast shipping. ⭐⭐⭐⭐⭐</p>
+            <p><strong>Emily Davis:</strong> I love this product! ⭐⭐⭐⭐☆</p>
+        </div>
+    </div>
+    <script>
+        // Product search and category filter
+        document.getElementById('search-bar').addEventListener('input', filterProducts);
+        document.getElementById('category-filter').addEventListener('change', filterProducts);
+
+        function filterProducts() {
+            const searchQuery = document.getElementById('search-bar').value.toLowerCase();
+            const category = document.getElementById('category-filter').value;
+            const products = document.querySelectorAll('.product');
+
+            products.forEach(product => {
+                const name = product.querySelector('h3').textContent.toLowerCase();
+                const productCategory = product.dataset.category;
+
+                if (name.includes(searchQuery) && (category === '' || productCategory === category)) {
+                    product.style.display = 'block';
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+        }
+
+        // Modal functions
+        function openModal(id) {
+            document.getElementById(id).style.display = 'block';
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+            }
+        }
+
+        // Newsletter form submission
+        document.getElementById('newsletter-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for subscribing to our newsletter!');
+        });
+    </script>
+    
+</body>
+</html>
